@@ -3,7 +3,7 @@ import { useContext, useState, useEffect } from "react"
 import { wildersContext } from "../contexts/WildersContext"
 import { wildersService } from "../service/wildersService/wildersService"
 import { rateService } from '../service/rateService/rateService';
-import { ISkillProps } from "../interface/Interface";
+import { ISkillProps } from "../interface/ISkill";
 
 const Skills = ({name, id, wilderId}: ISkillProps) => {
   const { fetchWilders } = useContext(wildersContext);

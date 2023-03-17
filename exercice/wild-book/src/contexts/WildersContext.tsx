@@ -1,11 +1,9 @@
 import { createContext, useState, useEffect } from "react";
 import { wildersService } from "../service/wildersService/wildersService";
 import { skillService } from "../service/skillService/skillService";
-import {
-  ISkillProps,
-  IWilderContextProps,
-  IWilderProps,
-} from "../interface/Interface";
+import {IWilderProps} from "../interface/IWilder";
+import { ISkillProps } from "../interface/ISkill";
+import { IWilderContextProps } from "../interface/IWilderContext";
 
 // on défini un nouveau context
 export const wildersContext = createContext<IWilderContextProps>({
@@ -14,10 +12,13 @@ export const wildersContext = createContext<IWilderContextProps>({
   fetchWilders: () => {},
   handleOpenModal: (arg) => {},
   handleCloseModal: () => {},
-
+  fetchSkills: () => {},
 });
 
-export const WildersProvider = ({ children }: any) => {
+interface WilderProviderProps {
+  children?: React.ReactNode
+}
+export const WildersProvider = ({ children }: WilderProviderProps) => {
   const [wilders, setWilders] = useState<IWilderProps[]>([]);
   const [skills, setSkills] = useState<ISkillProps[]>([]);
 
@@ -27,16 +28,15 @@ export const WildersProvider = ({ children }: any) => {
       modal.classList.remove("modalHidden");
       modal.classList.add("modalShow");
     }
-      
-  }
+  };
 
   const handleCloseModal = () => {
-    const modal = document.querySelector(".modalShow"); 
+    const modal = document.querySelector(".modalShow");
     if (modal) {
-      modal.classList.add("modalHidden")
-      modal.classList.remove("modalShow")
+      modal.classList.add("modalHidden");
+      modal.classList.remove("modalShow");
     }
-  }
+  };
 
   const fetchWilders = async () => {
     const wilders = await wildersService.getWilders();
@@ -60,6 +60,7 @@ export const WildersProvider = ({ children }: any) => {
         fetchWilders,
         handleOpenModal,
         handleCloseModal,
+        fetchSkills,
       }}
     >
       {children}

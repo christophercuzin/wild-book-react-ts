@@ -1,12 +1,13 @@
 import blank_profile from "../assets/blank_profile.png";
 import { wildersService } from "../service/wildersService/wildersService";
-import { IWilderProps } from "../interface/Interface";
+import { IWilderProps } from "../interface/IWilder";
 import Skill from "../components/Skill";
 import Modal from "../components/Modal";
 import { useContext } from "react";
 import { wildersContext } from "../contexts/WildersContext";
+import Select from "./Select";
 
-const WilderCard = ({ name, city, id, skills }: IWilderProps) => {
+const WilderCard = ({ name, city, id, skills, picture }: IWilderProps) => {
 
   const { fetchWilders, handleOpenModal } = useContext(wildersContext);
   const handleDeleteClick = async () => {
@@ -16,7 +17,14 @@ const WilderCard = ({ name, city, id, skills }: IWilderProps) => {
 
   return (
     <article className="card">
-      <img src={blank_profile} alt="Jane Doe Profile" />
+      <img
+        src={`/images/${picture}.png`}
+        onError={({ currentTarget }) => {
+          currentTarget.onerror = null;
+          currentTarget.src = blank_profile;
+        }}
+        alt={`${name} profile`}
+      />
       <h3>{name}</h3>
       <p>
         Bonjour, je m'appelle {name}, j'habite a {city}.
@@ -25,24 +33,23 @@ const WilderCard = ({ name, city, id, skills }: IWilderProps) => {
       {
         <ul className="skills">
           {skills.map((skill) => {
-            return (
-              <Skill
-                key={skill.name}
-                wilderId={id}
-                id={skill.id}
-                name={skill.name}
-              />
-            );
+            return <Skill key={skill.name} {...skill} wilderId={id} />;
           })}
         </ul>
       }
-      <button type="button" onClick={handleDeleteClick}>
+      <button
+        type="button"
+        className="deleteButton"
+        onClick={handleDeleteClick}
+      >
         remove
       </button>
       <button id={id.toString()} type="button" onClick={handleOpenModal}>
         Add skill
       </button>
-      <Modal id={id} />
+      <Modal id={id}>
+        <Select id={id} />
+      </Modal>
     </article>
   );
 };

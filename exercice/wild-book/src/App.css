@@ -2,6 +2,7 @@ body {
   font-family: sans-serif;
   color: #222;
   margin: 0;
+  box-sizing: border-box;
 }
 
 h1, h2, h3 {
@@ -39,7 +40,23 @@ header {
   background-color: #F76C6C;
   color: #fff;
 }
- 
+
+header .container {
+  display: flex;
+  justify-content: space-between;
+}
+header .linkList {
+  list-style-type: none;
+}
+header .linkList > li {
+  margin-bottom: 10px;
+}
+
+
+header .linkList > li > .link {
+  text-decoration: none;
+}
+
 footer {
   border-top: 2px solid #F76C6C;
 }
@@ -133,6 +150,12 @@ footer {
    height: 25px;
    width: 25px; 
 }
+
+.card .deleteButton {
+  background: #F76C6C;
+  border-radius: 5px;
+  border: 1px solid ;
+}
 .form-container {
   display: flex;
   width: 100vw;
@@ -169,6 +192,13 @@ footer {
   border-radius: 7px;
 }
 
+.formErrorMessage {
+  background: #FFF1EA;
+  padding: 5px;
+  border-radius: 7px;
+  color: #B95000;
+}
+
 .closeButton {
   width: 15px;
   text-align: center;
@@ -190,7 +220,7 @@ footer {
   top:0;
   left: 0;
   width: 100vw;
-  height: 100vh;
+  height: 100%;
 }
 .modal {
   background: white;

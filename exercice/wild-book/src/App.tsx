@@ -1,8 +1,10 @@
 import { WildersProvider } from "./contexts/WildersContext";
 import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
-import AddWilder from "./pages/Addwilder";
+import AddWilder from "./pages/AddwilderForm";
 import "./App.css";
+import AddSkill from "./pages/AddSkillForm";
+import LinkList from "./components/headerLink";
 
 function App() {
   return (
@@ -10,13 +12,14 @@ function App() {
       <header>
         <div className="container">
           <h1>Wilders Book</h1>
-          <a href={`/add-wilder`}>Add new wilder</a>
+          <LinkList />
         </div>
       </header>
       <WildersProvider>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/add-wilder" element={<AddWilder />} />
+          <Route path="/add-skill" element={<AddSkill />} />
         </Routes>
       </WildersProvider>
       <footer>

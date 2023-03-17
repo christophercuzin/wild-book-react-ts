@@ -6,8 +6,11 @@ export const wildersService = {
 
     return wilders;
   },
-  createWilder: async (name: string, email: string, city: string) => {
-    await axios.post("http://localhost:5000/api/wilder", { name, email, city });
+  createWilder: async (form: FormData) => {
+    const config = {
+      headers: { "Content-Type": "multipart/form-data" },
+    };
+    await axios.post("http://localhost:5000/api/wilder", form, config);
   },
   removeWilder: async (id: number) => {
     await axios.delete(`http://localhost:5000/api/wilder/${id}/delete`);

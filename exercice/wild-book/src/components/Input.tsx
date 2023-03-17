@@ -1,17 +1,17 @@
-import { IInputProps } from "../interface/Interface";
+import { IInputProps } from "../interface/IInput";
 
-const Input = ({ inputName, label, type, value, setter }: IInputProps) => {
+
+const Input = ({ register, label, type, regexp }: IInputProps) => {
   return (
     <div className="input-container">
-      <label htmlFor={inputName}>{label}</label>
+      <label htmlFor={label}>{label}</label>
       <input
-        id={inputName}
+        {...register(label, {
+          required: `Field ${label} is required`,
+          pattern: regexp,
+        })}
         className="input"
         type={type}
-        value={value}
-        onChange={(e) => {
-          setter(e.target.value);
-        }}
       />
     </div>
   );
